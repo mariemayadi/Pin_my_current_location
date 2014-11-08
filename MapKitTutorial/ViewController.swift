@@ -11,7 +11,7 @@ import MapKit
 
 class ViewController: UIViewController, MKMapViewDelegate {
 
-    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var mapView: MKMapView! 
     override func viewDidLoad() {
         super.viewDidLoad()
         // A Map kit needs to have certain values
@@ -32,6 +32,9 @@ class ViewController: UIViewController, MKMapViewDelegate {
         //A structure that defines which portion of the map to display. (center coordinate + span)
         var regionOfInterest:MKCoordinateRegion = MKCoordinateRegionMake(buildingLocation, theSpan)
         
+        self.mapView.setRegion(regionOfInterest, animated: true)
+        //NOTE:
+        //animated --> Specify YES if you want the map view to animate the transition to the new region or NO if you want the map to center on the specified region immediately.
     }
 
     override func didReceiveMemoryWarning() {

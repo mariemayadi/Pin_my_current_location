@@ -35,6 +35,15 @@ class ViewController: UIViewController, MKMapViewDelegate {
         self.mapView.setRegion(regionOfInterest, animated: true)
         //NOTE:
         //animated --> Specify YES if you want the map view to animate the transition to the new region or NO if you want the map to center on the specified region immediately.
+        
+        //The MKPointAnnotation class defines a concrete annotation object located at a specified point.
+        var buildingAnnotation = MKPointAnnotation()
+        
+        buildingAnnotation.coordinate = buildingLocation
+        buildingAnnotation.title = "Building"
+        buildingAnnotation.subtitle = "What about it"
+        
+        self.mapView.addAnnotation(buildingAnnotation)
     }
 
     override func didReceiveMemoryWarning() {

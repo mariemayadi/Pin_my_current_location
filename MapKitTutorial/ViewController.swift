@@ -17,8 +17,12 @@ class ViewController: UIViewController, MKMapViewDelegate {
         // A Map kit needs to have certain values
         
         //input known location
-        var latitude:CLLocationDegrees = 48.399193
-        var longitude:CLLocationDegrees = 9.993341
+        //var latitude:CLLocationDegrees = 48.399193
+        //var longitude:CLLocationDegrees = 9.993341
+        
+        //Ford Hall
+        var latitude:CLLocationDegrees = 42.315904
+        var longitude:CLLocationDegrees = -72.637915
         
         var latitudeDelta:CLLocationDegrees = 0.01
         var longitudeDelta:CLLocationDegrees = 0.01

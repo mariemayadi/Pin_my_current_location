@@ -8,13 +8,23 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
-class ViewController: UIViewController, MKMapViewDelegate {
+class ViewController: UIViewController, MKMapViewDelegate{
+    
+    //NOTE:
+    //The CLLocationManagerDelegate protocol defines the methods used to receive location and heading updates from a CLLocationManager object.
+    
+    let locationManager = CLLocationManager()
+    //NOTE:
+    //The CLLocationManager class is the central point for configuring the delivery of location- and heading-related events to your app. You use an instance of this class to establish the parameters that determine when location and heading events should be delivered and to start and stop the actual delivery of those events. You can also use a location manager object to retrieve the most recent location and heading data.
 
     @IBOutlet weak var mapView: MKMapView! 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // A Map kit needs to have certain values
+        
         
         //input known location
         //var latitude:CLLocationDegrees = 48.399193
@@ -48,6 +58,15 @@ class ViewController: UIViewController, MKMapViewDelegate {
         buildingAnnotation.subtitle = "What about it"
         
         self.mapView.addAnnotation(buildingAnnotation)
+        
+        // start updatug location once the application is loaded
+        //self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        self.locationManager.requestWhenInUseAuthorization()
+        //new for iOS8. We may add a description as to why we would like to add a user's description
+        self.locationManager.startUpdatingLocation()
+
     }
 
     override func didReceiveMemoryWarning() {

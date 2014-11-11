@@ -25,7 +25,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     let latitudeDelta:CLLocationDegrees = 0.01
     let longitudeDelta:CLLocationDegrees = 0.01
     //A structure that defines the area spanned by a map region.
-    let span:MKCoordinateSpan = MKCoordinateSpanMake(0.01, 0.01)
+    let span:MKCoordinateSpan = MKCoordinateSpanMake(0.001, 0.001)
     
     //NOTE:
     //The CLLocationManager class is the central point for configuring the delivery of location- and heading-related events to your app. You use an instance of this class to establish the parameters that determine when location and heading events should be delivered and to start and stop the actual delivery of those events. You can also use a location manager object to retrieve the most recent location and heading data.
@@ -53,6 +53,14 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         println("Assignment happended")
         println(longitude)
         println(latitude)
+        
+        var buildingAnnotation = MKPointAnnotation()
+        
+        buildingAnnotation.coordinate = buildingLocation
+        buildingAnnotation.title = "Building"
+        buildingAnnotation.subtitle = "What about it"
+        
+        self.mapView.addAnnotation(buildingAnnotation)
     }
     
     
@@ -85,7 +93,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         //The MKPointAnnotation class defines a concrete annotation object located at a specified point.
         
-        /*
+        
         var buildingAnnotation = MKPointAnnotation()
         
         buildingAnnotation.coordinate = buildingLocation
@@ -93,7 +101,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         buildingAnnotation.subtitle = "What about it"
         
         self.mapView.addAnnotation(buildingAnnotation)
-        */
+        
         
         // start updatug location once the application is loaded
         //self.locationManager.delegate = self

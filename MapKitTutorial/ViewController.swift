@@ -22,8 +22,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var latitude :CLLocationDegrees = 42.315904
     var longitude :CLLocationDegrees = -72.637915
     
-    let latitudeDelta:CLLocationDegrees = 0.01
-    let longitudeDelta:CLLocationDegrees = 0.01
     //A structure that defines the area spanned by a map region.
     let span:MKCoordinateSpan = MKCoordinateSpanMake(0.001, 0.001)
     var buildingAnnotation = MKPointAnnotation()
@@ -54,8 +52,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         println("Assignment happended")
         println(longitude)
         println(latitude)
-        
-        //var buildingAnnotation = MKPointAnnotation()
         
         buildingAnnotation.coordinate = buildingLocation
         buildingAnnotation.title = "Building"
@@ -93,10 +89,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         //animated --> Specify YES if you want the map view to animate the transition to the new region or NO if you want the map to center on the specified region immediately.
         
         //The MKPointAnnotation class defines a concrete annotation object located at a specified point.
-        
-        
-        //var buildingAnnotation = MKPointAnnotation()
-        
         buildingAnnotation.coordinate = buildingLocation
         buildingAnnotation.title = "Building"
         buildingAnnotation.subtitle = "What about it"
@@ -105,7 +97,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         
         // start updatug location once the application is loaded
-        //self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
         self.locationManager.requestWhenInUseAuthorization()

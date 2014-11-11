@@ -19,10 +19,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     //Have Lat and Long be global.
     //Default is Ford Hall
-    //var lat:CLLocationDegrees = 42.315904
-    //var long:CLLocationDegrees = -72.637915
-    var lat:CLLocationDegrees = 19
-    var long:CLLocationDegrees = 99.13333
+    var latitude :CLLocationDegrees = 42.315904
+    var longitude :CLLocationDegrees = -72.637915
+    
+    let latitudeDelta:CLLocationDegrees = 0.01
+    let longitudeDelta:CLLocationDegrees = 0.01
+    //A structure that defines the area spanned by a map region.
+    let span:MKCoordinateSpan = MKCoordinateSpanMake(0.01, 0.01)
     
     //NOTE:
     //The CLLocationManager class is the central point for configuring the delivery of location- and heading-related events to your app. You use an instance of this class to establish the parameters that determine when location and heading events should be delivered and to start and stop the actual delivery of those events. You can also use a location manager object to retrieve the most recent location and heading data.
@@ -36,12 +39,20 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         //NOTE:
         //The CLGeocoder class provides services for converting between a coordinate (specified as a latitude and longitude) and the user-friendly representation of that coordinate.
-        long = manager.location.coordinate.longitude
-        lat = manager.location.coordinate.latitude
+        longitude = manager.location.coordinate.longitude
+        latitude = manager.location.coordinate.latitude
+        
+        //Structure containing a geographical coordinate
+        var buildingLocation:CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
+        
+        //A structure that defines which portion of the map to display. (center coordinate + span)
+        var regionOfInterest:MKCoordinateRegion = MKCoordinateRegionMake(buildingLocation, span)
+        
+        self.mapView.setRegion(regionOfInterest, animated: true)
         
         println("Assignment happended")
-        println(long)
-        println(lat)
+        println(longitude)
+        println(latitude)
     }
     
     
@@ -51,8 +62,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         // A Map kit needs to have certain values
         
         println("inside viewDidLoad")
-        println(long)
-        println(lat)
+        println(longitude)
+        println(latitude)
         
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -60,28 +71,21 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         //new for iOS8. We may add a description as to why we would like to add a user's description
         self.locationManager.startUpdatingLocation()
         
-        //input known location
-        var latitude:CLLocationDegrees = lat
-        var longitude:CLLocationDegrees = long
-
         
-        var latitudeDelta:CLLocationDegrees = 0.01
-        var longitudeDelta:CLLocationDegrees = 0.01
-        
-        //A structure that defines the area spanned by a map region.
-        var theSpan:MKCoordinateSpan = MKCoordinateSpanMake(latitudeDelta, longitudeDelta)
     
         //Structure containing a geographical coordinate
         var buildingLocation:CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
         
         //A structure that defines which portion of the map to display. (center coordinate + span)
-        var regionOfInterest:MKCoordinateRegion = MKCoordinateRegionMake(buildingLocation, theSpan)
+        var regionOfInterest:MKCoordinateRegion = MKCoordinateRegionMake(buildingLocation, span)
         
         self.mapView.setRegion(regionOfInterest, animated: true)
         //NOTE:
         //animated --> Specify YES if you want the map view to animate the transition to the new region or NO if you want the map to center on the specified region immediately.
         
         //The MKPointAnnotation class defines a concrete annotation object located at a specified point.
+        
+        /*
         var buildingAnnotation = MKPointAnnotation()
         
         buildingAnnotation.coordinate = buildingLocation
@@ -89,6 +93,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         buildingAnnotation.subtitle = "What about it"
         
         self.mapView.addAnnotation(buildingAnnotation)
+        */
         
         // start updatug location once the application is loaded
         //self.locationManager.delegate = self
